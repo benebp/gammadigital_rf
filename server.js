@@ -6,9 +6,7 @@ app.use(express.json());
 const PORT = 3000;
 let getDb = require('./database.js');
 
-getDb.then(client => {
-  const gammaDb = client.db('gamma_db');
-  const recordCollection = gammaDb.collection('records_rf');
+getDb.then(recordCollection => {
   app.get('/records', (req, res) => {
     recordCollection.find().toArray()
       .then(result => {
